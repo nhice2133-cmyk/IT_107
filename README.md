@@ -6,7 +6,7 @@ A complete web application with user authentication features built with HTML, CS
 
 ```
 v4/
-├── html/                           # PHP pages
+├── pages/                          # PHP pages
 │   ├── index.php                  # Home page
 │   ├── login.php                  # Login page
 │   ├── register.php               # Registration page
@@ -66,7 +66,7 @@ v4/
 2. **Web Server**:
    - Place files in your XAMPP `htdocs` directory
    - Ensure PHP and MySQL are running
-   - Access via `http://localhost/v4/html/index.php`
+   - Access via `http://localhost/v5/pages/index.php`
 
 3. **Configuration**:
    - Update `APP_URL` in `php/config.php` to match your setup

@@ -220,21 +220,55 @@ class CyberpunkQuestions {
             };
 
             // Use finalize_registration for initial user creation flow
+            const submitBtn = this.form.querySelector('button[type="submit"]');
+            const originalText = submitBtn ? submitBtn.querySelector('.btn-text')?.textContent : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                if (submitBtn.querySelector('.btn-text')) {
+                    submitBtn.querySelector('.btn-text').textContent = 'PROCESSING...';
+                }
+            }
+
             fetch('../php/finalize_registration.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             })
-            .then(r => r.json())
+            .then(r => {
+                if (!r.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return r.json();
+            })
             .then(res => {
                 if (res.success) {
                     sessionStorage.removeItem('justRegistered');
-                    window.location.href = 'login.php';
+                    // Show success message
+                    this.showSuccessMessage('Registration successful! You can now login with your credentials.');
+                    // Redirect after showing message
+                    setTimeout(() => {
+                        window.location.href = 'login.php';
+                    }, 2000);
                 } else {
                     alert(res.message || 'Failed to save security questions');
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        if (submitBtn.querySelector('.btn-text') && originalText) {
+                            submitBtn.querySelector('.btn-text').textContent = originalText;
+                        }
+                    }
                 }
             })
-            .catch(() => alert('Network error. Please try again.'));
+            .catch((error) => {
+                console.error('Registration error:', error);
+                alert('Network error. Please try again.');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    if (submitBtn.querySelector('.btn-text') && originalText) {
+                        submitBtn.querySelector('.btn-text').textContent = originalText;
+                    }
+                }
+            });
         });
     }
 
@@ -250,6 +284,70 @@ class CyberpunkQuestions {
         el.style.boxShadow = 'none';
         err.textContent = '';
         err.classList.remove('show');
+    }
+
+    showSuccessMessage(message) {
+        // Create success message overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'system-message success';
+        overlay.innerHTML = `
+            <div class="message-content">
+                <div class="message-icon">✓</div>
+                <div class="message-text">${message}</div>
+            </div>
+        `;
+        
+        // Add styles
+        overlay.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #00ff85;
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            z-index: 10000;
+            color: #ffffff;
+            font-family: 'Orbitron', monospace;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0, 255, 133, 0.5), inset 0 0 20px rgba(0, 255, 133, 0.1);
+            animation: cyber-success-pulse 0.5s ease-out;
+        `;
+        
+        // Add icon and text styles (only if not already added)
+        if (!document.getElementById('cyber-success-styles')) {
+            const style = document.createElement('style');
+            style.id = 'cyber-success-styles';
+            style.textContent = `
+                .system-message.success .message-icon {
+                    font-size: 3rem;
+                    color: #00ff85;
+                    text-shadow: 0 0 20px #00ff85;
+                    margin-bottom: 0.5rem;
+                    animation: cyber-success-icon 1s ease-in-out infinite;
+                }
+                .system-message.success .message-text {
+                    font-size: 1rem;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                    color: #00ffff;
+                    text-shadow: 0 0 10px #00ffff;
+                }
+                @keyframes cyber-success-pulse {
+                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                }
+                @keyframes cyber-success-icon {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        document.body.appendChild(overlay);
     }
 
     simulateTerminalTyping() {

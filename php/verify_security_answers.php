@@ -15,8 +15,18 @@ $a3 = trim($payload['answer3'] ?? '');
 // Optional: allow password reset in the same call
 $newPassword = $payload['newPassword'] ?? '';
 
-if (!$email || !$a1 || !$a2 || !$a3) {
-    echo json_encode(['success' => false, 'message' => 'All fields are required']);
+if (!$email) {
+    echo json_encode(['success' => false, 'message' => 'Email is required']);
+    exit;
+}
+// At least 2 out of 3 answers must be provided
+$answersProvided = 0;
+if ($a1 !== '') $answersProvided++;
+if ($a2 !== '') $answersProvided++;
+if ($a3 !== '') $answersProvided++;
+
+if ($answersProvided < 2) {
+    echo json_encode(['success' => false, 'message' => 'Please answer at least 2 security questions']);
     exit;
 }
 if (!validateEmail($email)) { echo json_encode(['success' => false, 'message' => 'Invalid email']); exit; }
@@ -37,8 +47,14 @@ $q->execute([$user['id']]);
 $row = $q->fetch();
 if (!$row) { echo json_encode(['success' => false, 'message' => 'No security questions on file']); exit; }
 
-if (!password_verify($a1, $row['answer1']) || !password_verify($a2, $row['answer2']) || !password_verify($a3, $row['answer3'])) {
-    echo json_encode(['success' => false, 'message' => 'Security answers do not match']);
+// Verify answers: need at least 2 out of 3 correct
+$correctCount = 0;
+if ($a1 !== '' && password_verify($a1, $row['answer1'])) $correctCount++;
+if ($a2 !== '' && password_verify($a2, $row['answer2'])) $correctCount++;
+if ($a3 !== '' && password_verify($a3, $row['answer3'])) $correctCount++;
+
+if ($correctCount < 2) {
+    echo json_encode(['success' => false, 'message' => 'At least 2 security answers must be correct']);
     exit;
 }
 // If no newPassword provided, only verification is requested

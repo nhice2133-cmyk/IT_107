@@ -30,14 +30,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Track if fields have been typed in
+    let usernameTyped = false;
+    let passwordTyped = false;
+
     // Real-time validation with cyberpunk effects
-    usernameInput.addEventListener('blur', validateUsername);
+    usernameInput.addEventListener('blur', function() {
+        // Only validate if user has typed something or field has a value
+        if (usernameTyped || usernameInput.value.trim() !== '') {
+            validateUsername();
+        }
+    });
     usernameInput.addEventListener('input', function() {
+        usernameTyped = true;
         addTypingEffect(usernameInput);
     });
     
-    passwordInput.addEventListener('blur', validatePassword);
+    passwordInput.addEventListener('blur', function() {
+        // Only validate if user has typed something or field has a value
+        if (passwordTyped || passwordInput.value !== '') {
+            validatePassword();
+        }
+    });
     passwordInput.addEventListener('input', function() {
+        passwordTyped = true;
         addTypingEffect(passwordInput);
     });
 

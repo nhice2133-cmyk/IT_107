@@ -180,6 +180,20 @@ document.addEventListener('DOMContentLoaded', function() {
         errorElement.style.display = 'none';
     }
 
+    // Cyber eye SVG icon
+    function getEyeSVG(isVisible) {
+        const stroke = isVisible ? '#ff00ff' : '#00eaff';
+        const glow = isVisible ? 'rgba(255,0,255,0.6)' : 'rgba(0,234,255,0.6)';
+        const slash = isVisible ? '<path d="M3 3L21 21"></path>' : '';
+        return `
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px ${glow});">
+            <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+            ${slash}
+          </svg>
+        `;
+    }
+
     // Password visibility toggle
     window.togglePassword = function(fieldId) {
         const field = document.getElementById(fieldId);
@@ -187,12 +201,22 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (field.type === 'password') {
             field.type = 'text';
-            button.textContent = '🙈';
+            button.innerHTML = getEyeSVG(true);
+            button.setAttribute('aria-label', 'Hide password');
+            button.setAttribute('aria-pressed', 'true');
         } else {
             field.type = 'password';
-            button.textContent = '👁️';
+            button.innerHTML = getEyeSVG(false);
+            button.setAttribute('aria-label', 'Show password');
+            button.setAttribute('aria-pressed', 'false');
         }
     };
+
+    // Initialize eye icons on page load
+    const newPasswordButton = newPasswordInput.parentNode.querySelector('.show-password');
+    const confirmPasswordButton = confirmPasswordInput.parentNode.querySelector('.show-password');
+    if (newPasswordButton) newPasswordButton.innerHTML = getEyeSVG(false);
+    if (confirmPasswordButton) confirmPasswordButton.innerHTML = getEyeSVG(false);
 
     // Auto-focus on password field
     newPasswordInput.focus();

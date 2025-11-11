@@ -10,7 +10,7 @@ if (isset($_COOKIE['remember_token'])) {
 }
 
 // Redirect to login page
-header('Location: ../html/login.php');
+header('Location: ../pages/login.php');
 exit;
 ?>
 

@@ -3,7 +3,7 @@ require_once 'config.php';
 
 // Only allow authenticated admin
 if (!validateSession() || !isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
-    header('Location: ../html/login.php');
+    header('Location: ../pages/login.php');
     exit;
 }
 
@@ -13,7 +13,7 @@ header('Pragma: no-cache');
 header('Expires: 0');
 
 // Redirect to the frontend dashboard
-header('Location: ../html/dashboard.php');
+header('Location: ../pages/dashboard.php');
 ?>
 
 

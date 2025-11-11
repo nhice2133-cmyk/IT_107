@@ -862,9 +862,6 @@ class CyberpunkRegistration {
             const errorMessage = fieldErrors[fieldName];
             this.showFieldError(fieldName, errorMessage);
         });
-        
-        // Show general error message
-        this.showSystemError('Please correct the highlighted fields');
     }
 
     showFieldError(fieldName, errorMessage) {

@@ -15,7 +15,7 @@
         if (backHandled) return;
         backHandled = true;
         fetch('../php/destroy_session.php', { method: 'POST' })
-            .finally(() => { window.location.href = '../html/login.php'; });
+            .finally(() => { window.location.href = '../pages/login.php'; });
     }
 
     // Push a marker state so that a subsequent popstate indicates a back action

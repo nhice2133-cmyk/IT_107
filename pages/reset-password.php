@@ -82,7 +82,7 @@ if (isset($_SESSION['user_id'])) {
                                             </label>
                                             <div class="input-container">
                                                 <input type="password" class="cyber-input" id="newPassword">
-                                                <button type="button" class="show-password" onclick="togglePassword('newPassword')">👁️</button>
+                                                <button type="button" class="show-password" onclick="togglePassword('newPassword')" aria-label="Show password"></button>
                                                 <div class="input-glow"></div>
                                             </div>
                                             <div class="error-message" id="newPasswordError"></div>
@@ -97,7 +97,7 @@ if (isset($_SESSION['user_id'])) {
                                             </label>
                                             <div class="input-container">
                                                 <input type="password" class="cyber-input" id="confirmPassword">
-                                                <button type="button" class="show-password" onclick="togglePassword('confirmPassword')">👁️</button>
+                                                <button type="button" class="show-password" onclick="togglePassword('confirmPassword')" aria-label="Show password"></button>
                                                 <div class="input-glow"></div>
                                             </div>
                                             <div class="error-message" id="confirmPasswordError"></div>
