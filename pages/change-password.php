@@ -228,7 +228,10 @@ if (!isset($_SESSION['user_id']) && $mode !== 'forgot') {
         </div>
     </footer>
 
+<<<<<<< HEAD
     <script src="../js/disable-rightclick.js"></script>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
     <script src="../js/cyberpunk-change-password.js?v=20251013"></script>
     
     <!-- Back button protection disabled during debugging -->

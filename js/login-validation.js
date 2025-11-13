@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginAttemptsDiv = document.getElementById('loginAttempts');
     const attemptCountSpan = document.getElementById('attemptCount');
     const timerTextSpan = document.getElementById('timerText');
+<<<<<<< HEAD
     const forgotPrompt = document.getElementById('forgotPrompt');
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
 
     // Initialize cyberpunk effects
     initializeCyberpunkEffects();
@@ -19,7 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
         showPasswordBtn.setAttribute('aria-pressed', 'false');
         showPasswordBtn.innerHTML = getEyeSVG(false);
     }
+<<<<<<< HEAD
     updateForgotPromptDisplay(parseInt(localStorage.getItem('loginAttempts') || '0'));
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
 
     // Password visibility toggle with cyber SVG icon
     if (showPasswordBtn) {
@@ -228,6 +234,12 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.disabled = true;
         submitButton.querySelector('.btn-text').textContent = 'INITIATING...';
         
+<<<<<<< HEAD
+=======
+        // Add terminal effect
+        addTerminalEffect('AUTHENTICATING USER...');
+        
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
         // Get form data
         const formData = new FormData(loginForm);
         
@@ -240,22 +252,37 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             if (data.success) {
                 // Success - redirect to dashboard
+<<<<<<< HEAD
+=======
+                addTerminalEffect('ACCESS GRANTED! REDIRECTING...');
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                 showSuccessMessage('NEURAL LINK ESTABLISHED! Redirecting to dashboard...');
                 // Reset attempts on successful login since user is legitimate
                 localStorage.removeItem('loginAttempts');
                 clearLockoutState();
+<<<<<<< HEAD
                 updateForgotPromptDisplay(0);
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                 setTimeout(() => {
                     window.location.href = 'dashboard.php';
                 }, 2000);
             } else {
                 // Error - show message and update attempts
+<<<<<<< HEAD
+=======
+                addTerminalEffect('ACCESS DENIED! Invalid credentials.');
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                 showErrorMessage(data.message || 'AUTHENTICATION FAILED. Please try again.');
                 updateLoginAttempts();
             }
         })
         .catch(error => {
             console.error('Error:', error);
+<<<<<<< HEAD
+=======
+            addTerminalEffect('SYSTEM ERROR! Connection failed.');
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
             showErrorMessage('NEURAL NETWORK ERROR. Please try again.');
         })
         .finally(() => {
@@ -266,6 +293,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+<<<<<<< HEAD
+=======
+    function addTerminalEffect(message) {
+        const terminalContent = document.querySelector('.terminal-content');
+        if (!terminalContent) return;
+
+        const effectDiv = document.createElement('div');
+        effectDiv.className = 'terminal-effect';
+        effectDiv.style.cssText = `
+            color: #00ffff;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            animation: terminal-fade 3s ease-out forwards;
+        `;
+        effectDiv.textContent = '> ' + message;
+        
+        terminalContent.appendChild(effectDiv);
+        
+        setTimeout(() => {
+            effectDiv.remove();
+        }, 3000);
+    }
+
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
     function updateLoginAttempts() {
         let attempts = parseInt(localStorage.getItem('loginAttempts') || '0');
         attempts++;
@@ -277,8 +329,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         localStorage.setItem('loginAttempts', attempts.toString());
 
+<<<<<<< HEAD
         loginAttemptsDiv.style.display = 'flex';
         updateForgotPromptDisplay(attempts);
+=======
+        loginAttemptsDiv.style.display = 'block';
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
         // Format display based on attempt count
         if (attempts <= 3) {
             attemptCountSpan.textContent = `${attempts}/3`;
@@ -333,7 +389,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // show attempts if any
         const attempts = parseInt(localStorage.getItem('loginAttempts') || '0');
         if (attempts > 0) {
+<<<<<<< HEAD
             loginAttemptsDiv.style.display = 'flex';
+=======
+            loginAttemptsDiv.style.display = 'block';
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
             // Format display based on attempt count
             if (attempts <= 3) {
                 attemptCountSpan.textContent = `${attempts}/3`;
@@ -345,7 +405,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 attemptCountSpan.textContent = `${attempts}/9`;
             }
         }
+<<<<<<< HEAD
         updateForgotPromptDisplay(attempts);
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
     }
 
     function clearLockoutState() {
@@ -449,6 +512,7 @@ document.addEventListener('DOMContentLoaded', function() {
         input.style.textShadow = '';
     }
 
+<<<<<<< HEAD
     function updateForgotPromptDisplay(attempts) {
         const container = forgotPrompt ? forgotPrompt.closest('.login-attempts') : null;
         if (!forgotPrompt || !container) return;
@@ -459,6 +523,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
     function showSuccessMessage(message) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'cyber-success-message';

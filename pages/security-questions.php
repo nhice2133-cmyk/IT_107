@@ -27,7 +27,15 @@ if (isset($_SESSION['user_id'])) {
         <div class="header-content">
             <div class="logo-container">
                 <div class="logo-icon">⚡</div>
+<<<<<<< HEAD
                 <div class="logo-text">CYBER<span class="accent">AUTH</span></div>
+=======
+                <div class="logo-text">NEURAL<span class="accent">NET</span></div>
+            </div>
+            <div class="header-actions">
+                <a href="login.php" class="cyber-link">LOGIN</a>
+                <a href="index.php" class="cyber-link">HOME</a>
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
             </div>
         </div>
     </header>
@@ -60,7 +68,11 @@ if (isset($_SESSION['user_id'])) {
 
                             <form class="cyber-form" id="questionsForm" autocomplete="off">
                                 <div class="form-grid">
+<<<<<<< HEAD
                                     <div class="input-group question-block">
+=======
+                                    <div class="input-group full">
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                                         <label class="cyber-label">QUESTION 1*</label>
                                         <div class="input-container">
                                             <select class="cyber-input" id="auth_question1">
@@ -81,7 +93,11 @@ if (isset($_SESSION['user_id'])) {
                                         <div class="error-message" id="auth_answer1-error"></div>
                                     </div>
 
+<<<<<<< HEAD
                                     <div class="input-group question-block">
+=======
+                                    <div class="input-group full">
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                                         <label class="cyber-label">QUESTION 2*</label>
                                         <div class="input-container">
                                             <select class="cyber-input" id="auth_question2">
@@ -102,7 +118,11 @@ if (isset($_SESSION['user_id'])) {
                                         <div class="error-message" id="auth_answer2-error"></div>
                                     </div>
 
+<<<<<<< HEAD
                                     <div class="input-group question-block">
+=======
+                                    <div class="input-group full">
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                                         <label class="cyber-label">QUESTION 3*</label>
                                         <div class="input-container">
                                             <select class="cyber-input" id="auth_question3">
@@ -169,7 +189,10 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </footer>
 
+<<<<<<< HEAD
     <script src="../js/disable-rightclick.js"></script>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
     <script src="../js/cyberpunk-questions.js"></script>
 </body>
 </html>

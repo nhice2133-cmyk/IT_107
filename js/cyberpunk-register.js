@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const ALLOWED_EXTENSIONS = ['jr', 'sr', 'ii', 'iii', 'iv', 'v'];
 const ALLOWED_EXTENSION_SET = new Set(ALLOWED_EXTENSIONS);
 const EXTENSION_LABELS = {
@@ -27,6 +28,8 @@ function formatExtensionValue(value) {
     return EXTENSION_LABELS[lower] || '';
 }
 
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
 // Cyberpunk Registration System
 class CyberpunkRegistration {
     constructor() {
@@ -61,12 +64,31 @@ class CyberpunkRegistration {
         const email = document.getElementById('email');
         if (email) {
             email.addEventListener('blur', () => {
+<<<<<<< HEAD
                 const value = email.value.trim();
                 email.value = value;
                 const errorElement = document.getElementById('emailError');
                 if (value && !this.isValidEmail(value)) {
                     if (errorElement) {
                         errorElement.textContent = 'Invalid email format';
+=======
+                email.value = email.value.trim().toLowerCase();
+                const value = email.value;
+                const errorElement = document.getElementById('emailError');
+                if (value && (!this.isValidEmail(value) || this.isAllUppercaseEmail(value) || !this.isValidLocalPartCase(value) || !this.isValidDomainCase(value))) {
+                    let msg = 'Invalid email format';
+                    if (this.isValidEmail(value) && this.isAllUppercaseEmail(value)) {
+                        msg = 'Email must not be all uppercase';
+                    }
+                    if (this.isValidEmail(value) && !this.isAllUppercaseEmail(value) && !this.isValidLocalPartCase(value)) {
+                        msg = 'Before @: all lowercase or First letter uppercase only';
+                    }
+                    if (this.isValidEmail(value) && !this.isValidDomainCase(value)) {
+                        msg = 'Domain part must be lowercase (e.g., gmail.com not GMAIL.COM)';
+                    }
+                    if (errorElement) {
+                        errorElement.textContent = msg;
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                         errorElement.classList.add('show');
                     }
                     email.style.borderColor = 'var(--cyber-error)';
@@ -92,6 +114,7 @@ class CyberpunkRegistration {
                 }
                 this.clearError(username);
             });
+<<<<<<< HEAD
             username.addEventListener('keydown', (e) => {
                 if (e.ctrlKey || e.metaKey || e.altKey) return;
                 const isDigit = /\d/.test(e.key);
@@ -119,6 +142,8 @@ class CyberpunkRegistration {
                     }
                 }
             });
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
             username.addEventListener('blur', () => {
                 username.value = normalizeUsername(username.value);
                 const value = username.value;
@@ -184,13 +209,20 @@ class CyberpunkRegistration {
     setupCapitalizationValidation() {
         const nameFieldIds = [
             'firstName', 'lastName', 'middleName', 'extension',
+<<<<<<< HEAD
             'barangay', 'city', 'province'
+=======
+            'purok', 'barangay', 'city', 'province'
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
         ];
         nameFieldIds.forEach(id => {
             const el = document.getElementById(id);
             if (el) {
                 const isOptional = (id === 'middleName' || id === 'extension');
+<<<<<<< HEAD
                 const isNameField = (id === 'firstName' || id === 'lastName' || id === 'middleName');
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                 const validateField = () => {
                     const result = this.validateCapitalization(el, isOptional);
                     const errorElement = document.getElementById(id + 'Error');
@@ -206,6 +238,7 @@ class CyberpunkRegistration {
                     }
                 };
                 el.addEventListener('blur', validateField);
+<<<<<<< HEAD
                 // Also validate on input for real-time feedback (but not for name fields - they have their own validation)
                 if (!isNameField) {
                     el.addEventListener('input', () => {
@@ -217,6 +250,17 @@ class CyberpunkRegistration {
                         }
                     });
                 }
+=======
+                // Also validate on input for real-time feedback
+                el.addEventListener('input', () => {
+                    // Only validate if field has value (to avoid showing errors while typing)
+                    if (el.value.trim().length >= 3) {
+                        validateField();
+                    } else {
+                        this.clearError(el);
+                    }
+                });
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
             }
         });
     }
@@ -226,6 +270,7 @@ class CyberpunkRegistration {
         if (!raw && isOptional) return { ok: true };
         if (!raw && !isOptional) return { ok: false, message: 'This field is required' };
 
+<<<<<<< HEAD
         const fieldId = field.id;
 
         // Check for numbers and special characters in name fields (firstName, lastName, middleName)
@@ -284,6 +329,10 @@ class CyberpunkRegistration {
         const skipConsecutiveCheck = (fieldId === 'extension' && lowerValue === 'iii');
 
         if (!skipConsecutiveCheck && this.hasConsecutiveLetters(lowerValue)) {
+=======
+        // Check for 3 consecutive letters (for name fields)
+        if (this.hasConsecutiveLetters(raw.toLowerCase())) {
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
             return { ok: false, message: 'Cannot contain 3 consecutive letters' };
         }
 
@@ -348,6 +397,7 @@ class CyberpunkRegistration {
         const extension = document.getElementById('extension');
         if (extension) {
             extension.addEventListener('input', (e) => {
+<<<<<<< HEAD
                 let value = e.target.value || '';
                 let limitExceeded = false;
 
@@ -662,6 +712,18 @@ class CyberpunkRegistration {
                 });
             }
         });
+=======
+                // Remove any dots from the input
+                e.target.value = e.target.value.replace(/\./g, '');
+            });
+            // Prevent dot keypresses
+            extension.addEventListener('keypress', (e) => {
+                if (e.key === '.' || e.key === 'Period') {
+                    e.preventDefault();
+                }
+            });
+        }
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
     }
 
     addCyberpunkEffects() {
@@ -763,6 +825,7 @@ class CyberpunkRegistration {
         const password = document.getElementById('password');
         const confirmPassword = document.getElementById('confirmPassword');
         const errorElement = document.getElementById('confirmPasswordError');
+<<<<<<< HEAD
         const successElement = document.getElementById('confirmPasswordSuccess');
         
         if (password && confirmPassword && errorElement) {
@@ -789,6 +852,14 @@ class CyberpunkRegistration {
                     successElement.textContent = '';
                     successElement.classList.remove('show');
                 }
+=======
+        
+        if (password && confirmPassword && errorElement) {
+            if (confirmPassword.value && password.value !== confirmPassword.value) {
+                this.showError(confirmPassword, errorElement, 'Passwords do not match');
+            } else {
+                this.clearError(confirmPassword);
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
             }
         }
     }
@@ -819,6 +890,7 @@ class CyberpunkRegistration {
                 if (!value) {
                     errorMessage = 'This field is required';
                     isValid = false;
+<<<<<<< HEAD
                 } else if (/\d/.test(value)) {
                     // Check for numbers first
                     errorMessage = 'Numbers are not allowed in name fields';
@@ -833,6 +905,8 @@ class CyberpunkRegistration {
                         errorMessage = 'Invalid characters are not allowed. Only letters, spaces, hyphens, apostrophes, and periods are permitted';
                     }
                     isValid = false;
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                 } else if (value.length < 2) {
                     errorMessage = 'Must be at least 2 characters';
                     isValid = false;
@@ -841,6 +915,7 @@ class CyberpunkRegistration {
                     isValid = false;
                 }
                 break;
+<<<<<<< HEAD
             
             case 'middleName':
                 // Middle name is optional, but if provided, validate it
@@ -884,6 +959,8 @@ class CyberpunkRegistration {
                     }
                 }
                 break;
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                 
             case 'phoneNumber':
                 if (!value) {
@@ -969,6 +1046,7 @@ class CyberpunkRegistration {
                 break;
                 
             case 'purok':
+<<<<<<< HEAD
                 if (!value) {
                     errorMessage = 'This field is required';
                     isValid = false;
@@ -978,18 +1056,23 @@ class CyberpunkRegistration {
                 }
                 break;
                 
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
             case 'barangay':
             case 'city':
             case 'province':
                 if (!value) {
                     errorMessage = 'This field is required';
                     isValid = false;
+<<<<<<< HEAD
                 } else if (/^\d/.test(value.trim())) {
                     errorMessage = 'Cannot start with a number';
                     isValid = false;
                 } else if (/[^a-zA-Z0-9\s\-'\.\,]/.test(value)) {
                     errorMessage = 'Invalid characters';
                     isValid = false;
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                 } else if (this.hasConsecutiveLetters(value.toLowerCase())) {
                     errorMessage = 'Cannot contain 3 consecutive letters';
                     isValid = false;
@@ -1161,11 +1244,14 @@ class CyberpunkRegistration {
             return 'Username can only contain lowercase letters, numbers, and underscores';
         }
 
+<<<<<<< HEAD
         // Cannot start with a number
         if (/^[0-9]/.test(v)) {
             return 'Username cannot start with a number';
         }
 
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
         // Must contain at least one letter
         if (!/[a-z]/.test(v)) {
             return 'Username must contain at least one letter';
@@ -1222,9 +1308,12 @@ class CyberpunkRegistration {
         // Allowed chars only
         if (!/^[a-z0-9_]+$/.test(v)) return false;
 
+<<<<<<< HEAD
         // Cannot start with a number
         if (/^[0-9]/.test(v)) return false;
 
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
         // Must contain at least one letter
         if (!/[a-z]/.test(v)) return false;
 
@@ -1397,12 +1486,15 @@ class CyberpunkRegistration {
             element.textContent = '';
             element.classList.remove('show');
         });
+<<<<<<< HEAD
         // Clear all success messages
         const successElements = document.querySelectorAll('.success-message');
         successElements.forEach(element => {
             element.textContent = '';
             element.classList.remove('show');
         });
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
         
         // Clear all field highlighting
         const fields = document.querySelectorAll('.cyber-input');
@@ -1493,6 +1585,7 @@ function toTitleCase(str) {
         return match.toUpperCase();
     });
 }
+<<<<<<< HEAD
 
 function capitalizeFirstLetter(str) {
     if (typeof str !== 'string') return '';
@@ -1502,6 +1595,10 @@ function capitalizeFirstLetter(str) {
 }
 // Auto-fix name fields on blur (Title Case)
 ['firstName','lastName','middleName'].forEach(function(id) {
+=======
+// Auto-fix name and address fields on blur
+['firstName','lastName','middleName','purok','barangay','city','province'].forEach(function(id) {
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
     var elem = document.getElementById(id);
     if (elem) {
         elem.addEventListener('blur', function() {
@@ -1510,6 +1607,7 @@ function capitalizeFirstLetter(str) {
     }
 });
 
+<<<<<<< HEAD
 // Auto-capitalize extension field (optional)
 var extensionField = document.getElementById('extension');
 if (extensionField) {
@@ -1543,6 +1641,8 @@ if (extensionField) {
     }
 });
 
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
 // Normalize username: trim, collapse spaces, replace spaces with underscore, lowercase, remove invalids, collapse underscores
 function normalizeUsername(str) {
     if (!str) return '';
@@ -1551,7 +1651,10 @@ function normalizeUsername(str) {
     v = v.toLowerCase();                               // force lowercase
     v = v.replace(/[^a-z0-9_]/g, '');                  // keep only a-z0-9_
     v = v.replace(/_+/g, '_');                         // collapse multiple underscores
+<<<<<<< HEAD
     v = v.replace(/^[0-9]+/, '');                      // drop leading digits
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
     return v;
 }
 // Initialize the cyberpunk registration system
@@ -1572,6 +1675,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const idInput = document.getElementById('idNumber');
+<<<<<<< HEAD
     const idIcon = document.getElementById('idNumberIcon');
     if (idInput) {
         // Check if ID already exists (page reload)
@@ -1626,6 +1730,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     })
                     .catch(() => {
+=======
+    if (idInput) {
+        idInput.addEventListener('click', function () {
+            fetch('../php/get_next_id.php')
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success && result.idNumber) {
+                        idInput.value = result.idNumber;
+                        // Clear any previous errors
+                        const errorElement = document.getElementById('idError');
+                        if (errorElement) {
+                            errorElement.textContent = '';
+                            errorElement.classList.remove('show');
+                        }
+                    } else {
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                         const errorElement = document.getElementById('idError');
                         if (errorElement) {
                             errorElement.textContent = 'Unable to retrieve ID number. Please try again.';
@@ -1633,8 +1753,23 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                         idInput.style.borderColor = 'var(--cyber-error)';
                         idInput.style.boxShadow = '0 0 10px rgba(255, 0, 64, 0.3)';
+<<<<<<< HEAD
                     });
             });
         }
+=======
+                    }
+                })
+                .catch(() => {
+                    const errorElement = document.getElementById('idError');
+                    if (errorElement) {
+                        errorElement.textContent = 'Unable to retrieve ID number. Please try again.';
+                        errorElement.classList.add('show');
+                    }
+                    idInput.style.borderColor = 'var(--cyber-error)';
+                    idInput.style.boxShadow = '0 0 10px rgba(255, 0, 64, 0.3)';
+                });
+        });
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
     }
 });

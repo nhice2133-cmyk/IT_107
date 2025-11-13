@@ -29,7 +29,11 @@ if (isset($_SESSION['user_id'])) {
         <div class="header-content">
             <div class="logo-container">
                 <div class="logo-icon">⚡</div>
+<<<<<<< HEAD
                 <div class="logo-text">CYBER<span class="accent">AUTH</span></div>
+=======
+                <div class="logo-text">NEURAL<span class="accent">NET</span></div>
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
             </div>
             <div class="header-actions">
                 <a href="login.php" class="cyber-link">LOGIN</a>
@@ -72,7 +76,11 @@ if (isset($_SESSION['user_id'])) {
                                 <h2 class="terminal-title">INITIALIZE USER PROFILE</h2>
                                 <p class="terminal-subtitle">Enter your neural network credentials</p>
                                 
+<<<<<<< HEAD
                                 <form class="cyber-form" id="registrationForm" novalidate>
+=======
+                                <form class="cyber-form" id="registrationForm">
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                                     <div class="form-grid">
                                         <!-- Personal Information Section -->
                                         <div class="form-section">
@@ -85,7 +93,10 @@ if (isset($_SESSION['user_id'])) {
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="text" class="cyber-input" id="idNumber" name="idNumber" placeholder="YYYY-XXXX" readonly>
+<<<<<<< HEAD
                                                     <span class="field-icon" id="idNumberIcon" style="display: none;">🔒</span>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="idError"></div>
@@ -150,7 +161,11 @@ if (isset($_SESSION['user_id'])) {
                                                     BIRTH DATE*
                                                 </label>
                                                 <div class="input-container">
+<<<<<<< HEAD
                                                     <input type="date" class="cyber-input" id="birthDate" name="birthDate" >
+=======
+                                                    <input type="date" class="cyber-input" id="birthDate" name="birthDate" required>
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="birthDateError"></div>
@@ -162,7 +177,11 @@ if (isset($_SESSION['user_id'])) {
                                                     AGE*
                                                 </label>
                                                 <div class="input-container">
+<<<<<<< HEAD
                                                     <input type="number" class="cyber-input" id="age" name="age" min="1" max="120" required readonly style="pointer-events: none; cursor: not-allowed;">
+=======
+                                                    <input type="number" class="cyber-input" id="age" name="age" min="1" max="120" required readonly>
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="ageError"></div>
@@ -251,7 +270,10 @@ if (isset($_SESSION['user_id'])) {
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="confirmPasswordError"></div>
+<<<<<<< HEAD
                                                 <div class="success-message" id="confirmPasswordSuccess"></div>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
                                             </div>
                                         </div>
 
@@ -555,7 +577,10 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </footer>
 
+<<<<<<< HEAD
     <script src="../js/disable-rightclick.js"></script>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
     <script src="../js/cyberpunk-register.js"></script>
     <script>
         function toTitleCase(str) {

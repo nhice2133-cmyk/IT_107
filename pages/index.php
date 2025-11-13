@@ -148,6 +148,9 @@
     </div>
 </footer>
 
+<<<<<<< HEAD
 <script src="../js/disable-rightclick.js"></script>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
 </body>
 </html>

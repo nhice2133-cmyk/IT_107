@@ -473,10 +473,13 @@ body {
     outline: none;
 }
 
+<<<<<<< HEAD
 .cyber-input[id="idNumber"].locked {
     padding-right: 2rem;
 }
 
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
 .cyber-input:focus {
     border-color: var(--cyber-primary);
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
@@ -500,6 +503,7 @@ body {
     pointer-events: none;
 }
 
+<<<<<<< HEAD
 .field-icon {
     position: absolute;
     right: 10px;
@@ -544,6 +548,8 @@ body {
     user-select: none;
 }
 
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
 .show-password {
     position: absolute;
     right: 5px;
@@ -578,6 +584,7 @@ body {
     display: block;
 }
 
+<<<<<<< HEAD
 .success-message {
     color: var(--cyber-success);
     font-size: 0.5rem;
@@ -590,6 +597,8 @@ body {
     display: block;
 }
 
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
 /* Error field highlighting */
 .cyber-input.error-field {
     border-color: var(--cyber-error) !important;

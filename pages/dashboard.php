@@ -113,6 +113,13 @@ if (!validateSession()) {
         <div class="logo-icon">⚡</div>
         <h1 class="logo-text">CYBER<span class="accent">AUTH</span></h1>
       </div>
+<<<<<<< HEAD
+=======
+      <div class="header-actions">
+        <a href="change-password.php" class="nav-link cyber-link">CHANGE PASSWORD</a>
+        <a href="../php/logout.php" class="nav-link cyber-link">LOGOUT</a>
+      </div>
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
     </div>
   </header>
 
@@ -187,7 +194,10 @@ if (!validateSession()) {
     </div>
   </footer>
 
+<<<<<<< HEAD
   <script src="../js/disable-rightclick.js"></script>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
   <script src="../js/dashboard.js"></script>
   
   <!-- Back button protection disabled during debugging -->
