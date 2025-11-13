@@ -578,6 +578,18 @@ body {
     display: block;
 }
 
+.success-message {
+    color: var(--cyber-success);
+    font-size: 0.5rem;
+    margin-top: 0.1rem;
+    display: none;
+    font-weight: 500;
+}
+
+.success-message.show {
+    display: block;
+}
+
 /* Error field highlighting */
 .cyber-input.error-field {
     border-color: var(--cyber-error) !important;

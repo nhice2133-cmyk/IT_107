@@ -29,7 +29,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="header-content">
             <div class="logo-container">
                 <div class="logo-icon">⚡</div>
-                <div class="logo-text">NEURAL<span class="accent">NET</span></div>
+                <div class="logo-text">CYBER<span class="accent">AUTH</span></div>
             </div>
             <div class="header-actions">
                 <a href="login.php" class="cyber-link">LOGIN</a>
@@ -72,7 +72,7 @@ if (isset($_SESSION['user_id'])) {
                                 <h2 class="terminal-title">INITIALIZE USER PROFILE</h2>
                                 <p class="terminal-subtitle">Enter your neural network credentials</p>
                                 
-                                <form class="cyber-form" id="registrationForm">
+                                <form class="cyber-form" id="registrationForm" novalidate>
                                     <div class="form-grid">
                                         <!-- Personal Information Section -->
                                         <div class="form-section">
@@ -150,7 +150,7 @@ if (isset($_SESSION['user_id'])) {
                                                     BIRTH DATE*
                                                 </label>
                                                 <div class="input-container">
-                                                    <input type="date" class="cyber-input" id="birthDate" name="birthDate" required>
+                                                    <input type="date" class="cyber-input" id="birthDate" name="birthDate" >
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="birthDateError"></div>
@@ -251,6 +251,7 @@ if (isset($_SESSION['user_id'])) {
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="confirmPasswordError"></div>
+                                                <div class="success-message" id="confirmPasswordSuccess"></div>
                                             </div>
                                         </div>
 

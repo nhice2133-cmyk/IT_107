@@ -137,12 +137,16 @@ if (isset($_SESSION['user_id'])) {
                                     <div class="error-message" id="password-error"></div>
                                 </div>
                                 
-                                <div class="login-attempts" id="loginAttempts" style="display: none;">
+                                <div class="login-attempts" id="loginAttempts">
                                     <div class="attempts-warning">
                                         <span class="warning-icon">⚠️</span>
                                         <span class="attempts-text">ACCESS DENIED: <span id="attemptCount">0</span>
                                     </div>
                                     <div class="timer-text" id="timerText" style="display: none;"></div>
+                                    <div class="forgot-prompt" id="forgotPrompt">
+                                        <span class="forgot-text">Forgot Password?</span>
+                                        <a href="forgot-password.php" class="cyber-link" id="forgotPromptLink">Reset</a>
+                                    </div>
                                 </div>
                                 
                                 <button type="submit" class="cyber-btn" id="loginBtn">

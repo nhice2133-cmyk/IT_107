@@ -1,3 +1,32 @@
+const ALLOWED_EXTENSIONS = ['jr', 'sr', 'ii', 'iii', 'iv', 'v'];
+const ALLOWED_EXTENSION_SET = new Set(ALLOWED_EXTENSIONS);
+const EXTENSION_LABELS = {
+    jr: 'Jr',
+    sr: 'Sr',
+    ii: 'II',
+    iii: 'III',
+    iv: 'IV',
+    v: 'V'
+};
+const EXTENSION_DISPLAY_LIST = 'Jr, Sr, II, III, IV, V';
+
+function isValidExtensionValue(value) {
+    if (!value) return false;
+    return ALLOWED_EXTENSION_SET.has(value.toLowerCase());
+}
+
+function matchesExtensionPrefix(value) {
+    if (!value) return true;
+    const lower = value.toLowerCase();
+    return ALLOWED_EXTENSIONS.some(ext => ext.startsWith(lower));
+}
+
+function formatExtensionValue(value) {
+    if (!value) return '';
+    const lower = value.toLowerCase();
+    return EXTENSION_LABELS[lower] || '';
+}
+
 // Cyberpunk Registration System
 class CyberpunkRegistration {
     constructor() {
@@ -62,6 +91,33 @@ class CyberpunkRegistration {
                     try { username.setSelectionRange(caret, caret); } catch (e) {}
                 }
                 this.clearError(username);
+            });
+            username.addEventListener('keydown', (e) => {
+                if (e.ctrlKey || e.metaKey || e.altKey) return;
+                const isDigit = /\d/.test(e.key);
+                const caretPos = username.selectionStart;
+                const selectionCollapsed = username.selectionStart === username.selectionEnd;
+                const insertingAtStart = caretPos === 0 || (!selectionCollapsed && username.selectionStart === 0);
+                if (isDigit && insertingAtStart) {
+                    e.preventDefault();
+                    const errorElement = document.getElementById('usernameError');
+                    if (errorElement) {
+                        errorElement.textContent = 'Username cannot start with a number';
+                        errorElement.classList.add('show');
+                    }
+                    username.style.borderColor = 'var(--cyber-error)';
+                    username.style.boxShadow = '0 0 10px rgba(255, 0, 64, 0.3)';
+                } else {
+                    const errorElement = document.getElementById('usernameError');
+                    if (errorElement && errorElement.textContent === 'Username cannot start with a number') {
+                        errorElement.textContent = '';
+                        errorElement.classList.remove('show');
+                        if (!username.classList.contains('error-field')) {
+                            username.style.borderColor = '';
+                            username.style.boxShadow = '';
+                        }
+                    }
+                }
             });
             username.addEventListener('blur', () => {
                 username.value = normalizeUsername(username.value);
@@ -195,12 +251,22 @@ class CyberpunkRegistration {
 
         // Address fields validation
         if (fieldId === 'purok') {
-            // PUROK/STREET accepts numbers only
-            if (!/^\d+$/.test(raw)) {
-                return { ok: false, message: 'Numbers only' };
+            // Purok: allow letters, numbers, spaces, hyphen
+            if (/[^A-Za-z0-9\s\-]/.test(raw)) {
+                return { ok: false, message: 'Only letters, numbers, spaces, and hyphen allowed' };
             }
-            // If valid (numbers only), return early - no need to check consecutive letters
+            if (/^\s/.test(field.value)) {
+                return { ok: false, message: 'Cannot start with a space' };
+            }
             return { ok: true };
+        } else if (fieldId === 'extension') {
+            // Extension must be 1-3 letters only
+            if (!/^[A-Za-z]{1,3}$/.test(raw)) {
+                return { ok: false, message: 'Extension must be 1-3 letters (letters only)' };
+            }
+            if (!isValidExtensionValue(raw)) {
+                return { ok: false, message: `Extension must be one of: ${EXTENSION_DISPLAY_LIST}` };
+            }
         } else if (fieldId === 'province' || fieldId === 'city' || fieldId === 'barangay') {
             // PROVINCE, CITY, BARANGAY must NOT start with a number
             if (/^\d/.test(raw)) {
@@ -214,7 +280,10 @@ class CyberpunkRegistration {
         }
 
         // Check for 3 consecutive letters (for name fields and address fields, but not purok)
-        if (this.hasConsecutiveLetters(raw.toLowerCase())) {
+        const lowerValue = raw.toLowerCase();
+        const skipConsecutiveCheck = (fieldId === 'extension' && lowerValue === 'iii');
+
+        if (!skipConsecutiveCheck && this.hasConsecutiveLetters(lowerValue)) {
             return { ok: false, message: 'Cannot contain 3 consecutive letters' };
         }
 
@@ -279,13 +348,100 @@ class CyberpunkRegistration {
         const extension = document.getElementById('extension');
         if (extension) {
             extension.addEventListener('input', (e) => {
-                // Remove any dots from the input
-                e.target.value = e.target.value.replace(/\./g, '');
+                let value = e.target.value || '';
+                let limitExceeded = false;
+
+                value = value.replace(/\./g, '');
+                value = value.replace(/[^a-zA-Z]/g, '');
+
+                if (value.length > 3) {
+                    value = value.substring(0, 3);
+                    limitExceeded = true;
+                }
+
+                e.target.value = value;
+
+                const errorElement = document.getElementById('extensionError');
+                const showError = (message) => {
+                    if (errorElement) {
+                        errorElement.textContent = message;
+                        errorElement.classList.add('show');
+                    }
+                    extension.style.borderColor = 'var(--cyber-error)';
+                    extension.style.boxShadow = '0 0 10px rgba(255, 0, 64, 0.3)';
+                };
+                const clearError = () => {
+                    if (errorElement) {
+                        errorElement.textContent = '';
+                        errorElement.classList.remove('show');
+                    }
+                    if (!extension.classList.contains('error-field')) {
+                        extension.style.borderColor = '';
+                        extension.style.boxShadow = '';
+                    }
+                };
+
+                if (!value) {
+                    clearError();
+                    return;
+                }
+                if (limitExceeded) {
+                    showError('Extension allows up to 3 letters');
+                    return;
+                }
+                if (!matchesExtensionPrefix(value)) {
+                    showError(`Extension must be one of: ${EXTENSION_DISPLAY_LIST}`);
+                    return;
+                }
+                clearError();
             });
             // Prevent dot keypresses
             extension.addEventListener('keypress', (e) => {
-                if (e.key === '.' || e.key === 'Period') {
+                const isCtrl = e.ctrlKey || e.metaKey || e.altKey;
+                if (isCtrl) return;
+                // Allow navigation keys
+                if (['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Home', 'End'].includes(e.key)) {
+                    return;
+                }
+                // Block dots, numbers, and limit length to 3
+                if (e.key === '.' || e.key === 'Period' || /\d/.test(e.key) || !/[a-zA-Z]/.test(e.key) || extension.value.length >= 3) {
                     e.preventDefault();
+                    const errorElement = document.getElementById('extensionError');
+                    if (errorElement) {
+                        errorElement.textContent = extension.value.length >= 3
+                            ? 'Extension allows up to 3 letters'
+                            : 'Extension allows letters only';
+                        errorElement.classList.add('show');
+                    }
+                    extension.style.borderColor = 'var(--cyber-error)';
+                    extension.style.boxShadow = '0 0 10px rgba(255, 0, 64, 0.3)';
+                }
+            });
+            extension.addEventListener('keydown', (e) => {
+                if (e.ctrlKey || e.metaKey || e.altKey) return;
+                const isDigit = /\d/.test(e.key);
+                const caretPos = extension.selectionStart;
+                const selectionCollapsed = extension.selectionStart === extension.selectionEnd;
+                const insertingAtStart = caretPos === 0 || (!selectionCollapsed && extension.selectionStart === 0);
+                if (isDigit && insertingAtStart) {
+                    e.preventDefault();
+                    const errorElement = document.getElementById('extensionError');
+                    if (errorElement) {
+                        errorElement.textContent = 'Extension cannot start with a number';
+                        errorElement.classList.add('show');
+                    }
+                    extension.style.borderColor = 'var(--cyber-error)';
+                    extension.style.boxShadow = '0 0 10px rgba(255, 0, 64, 0.3)';
+                } else {
+                    const errorElement = document.getElementById('extensionError');
+                    if (errorElement) {
+                        errorElement.textContent = '';
+                        errorElement.classList.remove('show');
+                    }
+                    if (!extension.classList.contains('error-field')) {
+                        extension.style.borderColor = '';
+                        extension.style.boxShadow = '';
+                    }
                 }
             });
         }
@@ -391,10 +547,11 @@ class CyberpunkRegistration {
             }
         });
 
-        // Purok field: accept numbers only
+        // Purok field: allow letters, numbers, spaces, hyphen (no strict number requirement)
         const purok = document.getElementById('purok');
         if (purok) {
-            // Prevent typing non-digits
+            const purokError = document.getElementById('purokError');
+            // Prevent invalid characters
             purok.addEventListener('keypress', (e) => {
                 // Allow control keys (Ctrl, Cmd, Alt, etc.)
                 if (e.ctrlKey || e.metaKey || e.altKey) {
@@ -406,40 +563,44 @@ class CyberpunkRegistration {
                     return;
                 }
                 
-                // Only allow digits
-                if (!/\d/.test(e.key)) {
+                // Prevent leading spaces
+                if (e.key === ' ' && purok.selectionStart === 0) {
                     e.preventDefault();
-                    // Show error message
-                    const errorElement = document.getElementById('purokError');
-                    if (errorElement) {
-                        errorElement.textContent = 'Numbers only';
-                        errorElement.classList.add('show');
-                        setTimeout(() => {
-                            errorElement.textContent = '';
-                            errorElement.classList.remove('show');
-                        }, 2000);
+                    return;
+                }
+
+                // Allow letters, numbers, spaces, and hyphen
+                if (!/[A-Za-z0-9\- ]/.test(e.key)) {
+                    e.preventDefault();
+                    if (purokError) {
+                        purokError.textContent = 'Only letters, numbers, spaces, and hyphen allowed';
+                        purokError.classList.add('show');
                     }
+                    purok.style.borderColor = 'var(--cyber-error)';
+                    purok.style.boxShadow = '0 0 10px rgba(255, 0, 64, 0.3)';
                 }
             });
             
-            // Also check on input to handle paste operations - remove non-digits
+            // Handle input/paste operations
             purok.addEventListener('input', (e) => {
-                const value = e.target.value;
-                // Remove all non-digit characters
-                const digitsOnly = value.replace(/\D/g, '');
-                if (value !== digitsOnly) {
-                    e.target.value = digitsOnly;
-                    // Show error message
-                    const errorElement = document.getElementById('purokError');
-                    if (errorElement) {
-                        errorElement.textContent = 'Numbers only';
-                        errorElement.classList.add('show');
-                        setTimeout(() => {
-                            errorElement.textContent = '';
-                            errorElement.classList.remove('show');
-                        }, 2000);
+                let value = e.target.value || '';
+                const sanitized = value.replace(/[^A-Za-z0-9\s\-]/g, '');
+                if (sanitized !== value) {
+                    if (purokError) {
+                        purokError.textContent = 'Only letters, numbers, spaces, and hyphen allowed';
+                        purokError.classList.add('show');
                     }
+                    purok.style.borderColor = 'var(--cyber-error)';
+                    purok.style.boxShadow = '0 0 10px rgba(255, 0, 64, 0.3)';
+                } else if (purokError && !purok.classList.contains('error-field')) {
+                    purokError.textContent = '';
+                    purokError.classList.remove('show');
+                    purok.style.borderColor = '';
+                    purok.style.boxShadow = '';
                 }
+                value = sanitized;
+                value = value.replace(/^\s+/, '');
+                e.target.value = value;
             });
             
             // Block wheel changes on number inputs
@@ -602,12 +763,32 @@ class CyberpunkRegistration {
         const password = document.getElementById('password');
         const confirmPassword = document.getElementById('confirmPassword');
         const errorElement = document.getElementById('confirmPasswordError');
+        const successElement = document.getElementById('confirmPasswordSuccess');
         
         if (password && confirmPassword && errorElement) {
-            if (confirmPassword.value && password.value !== confirmPassword.value) {
+            const confirmValue = confirmPassword.value;
+            if (confirmValue && password.value !== confirmValue) {
                 this.showError(confirmPassword, errorElement, 'Passwords do not match');
+                if (successElement) {
+                    successElement.textContent = '';
+                    successElement.classList.remove('show');
+                }
+                confirmPassword.style.borderColor = 'var(--cyber-error)';
+                confirmPassword.style.boxShadow = '0 0 10px rgba(255, 0, 64, 0.3)';
+            } else if (confirmValue && password.value === confirmValue) {
+                this.clearError(confirmPassword);
+                if (successElement) {
+                    successElement.textContent = 'Passwords match';
+                    successElement.classList.add('show');
+                }
+                confirmPassword.style.borderColor = 'var(--cyber-success)';
+                confirmPassword.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.3)';
             } else {
                 this.clearError(confirmPassword);
+                if (successElement) {
+                    successElement.textContent = '';
+                    successElement.classList.remove('show');
+                }
             }
         }
     }
@@ -679,6 +860,25 @@ class CyberpunkRegistration {
                         }
                         isValid = false;
                     } else if (this.hasConsecutiveLetters(value.toLowerCase())) {
+                        errorMessage = 'Cannot contain 3 consecutive letters';
+                        isValid = false;
+                    }
+                }
+                break;
+            
+            case 'extension':
+                // Extension is optional; if provided, it must match allowed list
+                if (value) {
+                    if (/[^a-zA-Z]/.test(value)) {
+                        errorMessage = 'Extension allows letters only';
+                        isValid = false;
+                    } else if (value.length > 3) {
+                        errorMessage = 'Extension allows up to 3 letters';
+                        isValid = false;
+                    } else if (!isValidExtensionValue(value)) {
+                        errorMessage = `Extension must be one of: ${EXTENSION_DISPLAY_LIST}`;
+                        isValid = false;
+                    } else if (this.hasConsecutiveLetters(value.toLowerCase()) && value.toLowerCase() !== 'iii') {
                         errorMessage = 'Cannot contain 3 consecutive letters';
                         isValid = false;
                     }
@@ -772,8 +972,8 @@ class CyberpunkRegistration {
                 if (!value) {
                     errorMessage = 'This field is required';
                     isValid = false;
-                } else if (!/^\d+$/.test(value.trim())) {
-                    errorMessage = 'Numbers only';
+                } else if (/[^A-Za-z0-9\s\-]/.test(value)) {
+                    errorMessage = 'Only letters, numbers, spaces, and hyphen allowed';
                     isValid = false;
                 }
                 break;
@@ -961,6 +1161,11 @@ class CyberpunkRegistration {
             return 'Username can only contain lowercase letters, numbers, and underscores';
         }
 
+        // Cannot start with a number
+        if (/^[0-9]/.test(v)) {
+            return 'Username cannot start with a number';
+        }
+
         // Must contain at least one letter
         if (!/[a-z]/.test(v)) {
             return 'Username must contain at least one letter';
@@ -1016,6 +1221,9 @@ class CyberpunkRegistration {
 
         // Allowed chars only
         if (!/^[a-z0-9_]+$/.test(v)) return false;
+
+        // Cannot start with a number
+        if (/^[0-9]/.test(v)) return false;
 
         // Must contain at least one letter
         if (!/[a-z]/.test(v)) return false;
@@ -1189,6 +1397,12 @@ class CyberpunkRegistration {
             element.textContent = '';
             element.classList.remove('show');
         });
+        // Clear all success messages
+        const successElements = document.querySelectorAll('.success-message');
+        successElements.forEach(element => {
+            element.textContent = '';
+            element.classList.remove('show');
+        });
         
         // Clear all field highlighting
         const fields = document.querySelectorAll('.cyber-input');
@@ -1286,8 +1500,8 @@ function capitalizeFirstLetter(str) {
     if (!trimmed) return '';
     return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
 }
-// Auto-fix name and address fields on blur
-['firstName','lastName','middleName','barangay','city','province'].forEach(function(id) {
+// Auto-fix name fields on blur (Title Case)
+['firstName','lastName','middleName'].forEach(function(id) {
     var elem = document.getElementById(id);
     if (elem) {
         elem.addEventListener('blur', function() {
@@ -1305,9 +1519,29 @@ if (extensionField) {
             extensionField.value = '';
             return;
         }
-        extensionField.value = capitalizeFirstLetter(fixed);
+        const formatted = formatExtensionValue(fixed);
+        if (formatted) {
+            extensionField.value = formatted;
+        } else {
+            extensionField.value = fixed;
+        }
     });
 }
+
+// Auto-capitalize first letter for address fields (province, city, barangay)
+['province','city','barangay','purok'].forEach(function(id) {
+    var elem = document.getElementById(id);
+    if (elem) {
+        elem.addEventListener('blur', function() {
+            const fixed = autoFixNameSpaces(elem.value);
+            if (!fixed) {
+                elem.value = '';
+                return;
+            }
+            elem.value = capitalizeFirstLetter(fixed);
+        });
+    }
+});
 
 // Normalize username: trim, collapse spaces, replace spaces with underscore, lowercase, remove invalids, collapse underscores
 function normalizeUsername(str) {
@@ -1317,6 +1551,7 @@ function normalizeUsername(str) {
     v = v.toLowerCase();                               // force lowercase
     v = v.replace(/[^a-z0-9_]/g, '');                  // keep only a-z0-9_
     v = v.replace(/_+/g, '_');                         // collapse multiple underscores
+    v = v.replace(/^[0-9]+/, '');                      // drop leading digits
     return v;
 }
 // Initialize the cyberpunk registration system
