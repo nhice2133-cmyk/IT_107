@@ -1,10 +1,17 @@
 // Forgot Password Questions JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('forgotPasswordQuestionsForm');
+<<<<<<< HEAD
     const idNumber = sessionStorage.getItem('fp_idNumber');
     
     if (!idNumber) {
         showSystemError('No ID number found. Please start the forgot password process again.');
+=======
+    const email = sessionStorage.getItem('fp_email');
+    
+    if (!email) {
+        showSystemError('No email found. Please start the forgot password process again.');
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
         setTimeout(() => {
             window.location.href = 'forgot-password.php';
         }, 2000);
@@ -12,7 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Load user's security questions
+<<<<<<< HEAD
     loadSecurityQuestions(idNumber);
+=======
+    loadSecurityQuestions(email);
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 
     // Form submission
     form.addEventListener('submit', function(e) {
@@ -34,11 +45,19 @@ document.addEventListener('DOMContentLoaded', function() {
         if (this.value.trim()) clearError('answer3');
     });
 
+<<<<<<< HEAD
     function loadSecurityQuestions(idNumber) {
         fetch('../php/get_security_questions.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ idNumber: idNumber })
+=======
+    function loadSecurityQuestions(email) {
+        fetch('../php/get_security_questions.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
         })
         .then(response => response.json())
         .then(data => {
@@ -105,7 +124,11 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
+<<<<<<< HEAD
                 idNumber: idNumber,
+=======
+                email: email,
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                 ...answers
             })
         })

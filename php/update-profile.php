@@ -15,6 +15,7 @@ if (!$input) {
     exit; 
 }
 
+<<<<<<< HEAD
 $firstNameRaw = trim((string)($input['firstName'] ?? ''));
 $middleNameRaw = trim((string)($input['middleName'] ?? ''));
 $lastNameRaw = trim((string)($input['lastName'] ?? ''));
@@ -156,11 +157,26 @@ if ($purokValue === '') {
 if ($addressValue === '') {
     $errors[] = 'Address is required';
 }
+=======
+$username = sanitizeInput($input['username'] ?? '');
+$email = sanitizeInput($input['email'] ?? '');
+$phone = sanitizeInput($input['phone'] ?? '');
+$address = sanitizeInput($input['address'] ?? '');
+
+$errors = [];
+if ($username === '' || strlen($username) < 3 || !preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
+    $errors[] = 'Invalid username';
+}
+if ($email === '' || !validateEmail($email)) {
+    $errors[] = 'Invalid email';
+}
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 if (!empty($errors)) { 
     echo json_encode(['success' => false, 'message' => implode(', ', $errors)]); 
     exit; 
 }
 
+<<<<<<< HEAD
 $firstName = sanitizeInput($firstNameRaw);
 $middleName = sanitizeInput($middleNameRaw);
 $lastName = sanitizeInput($lastNameRaw);
@@ -184,10 +200,13 @@ if ($extension === '') {
     $extension = null;
 }
 
+=======
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 try {
     $db = new Database();
 
     // Ensure uniqueness excluding current user
+<<<<<<< HEAD
     $chk = $db->prepare('SELECT id FROM users WHERE username = ? AND id <> ? LIMIT 1');
     $chk->execute([$username, $_SESSION['user_id']]);
     if ($chk->fetch()) {
@@ -231,6 +250,19 @@ try {
     ]);
 
 echo json_encode(['success' => true, 'message' => 'Profile updated successfully']);
+=======
+    $chk = $db->prepare('SELECT id FROM users WHERE (username = ? OR email = ?) AND id <> ? LIMIT 1');
+    $chk->execute([$username, $email, $_SESSION['user_id']]);
+    if ($chk->fetch()) {
+        echo json_encode(['success' => false, 'message' => 'Username or email already in use']);
+        exit;
+    }
+
+    $stmt = $db->prepare('UPDATE users SET username = ?, email = ?, phone = ?, address = ? WHERE id = ?');
+    $stmt->execute([$username, $email, $phone, $address, $_SESSION['user_id']]);
+
+    echo json_encode(['success' => true, 'message' => 'Profile updated successfully']);
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 } catch (Exception $e) {
     error_log('Update profile error: ' . $e->getMessage());
     http_response_code(500);
@@ -238,3 +270,8 @@ echo json_encode(['success' => true, 'message' => 'Profile updated successfully'
 }
 
 ?>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e

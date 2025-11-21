@@ -210,7 +210,14 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </footer>
 
+<<<<<<< HEAD
     <script src="../js/disable-rightclick.js"></script>
+=======
+<<<<<<< HEAD
+    <script src="../js/disable-rightclick.js"></script>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
     <script src="../js/reset-password.js"></script>
 </body>
 </html>

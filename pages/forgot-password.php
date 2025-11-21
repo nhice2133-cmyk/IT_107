@@ -48,11 +48,19 @@ if (isset($_SESSION['user_id'])) {
 
     .form-group { margin-bottom: 0.8rem; }
     label { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 0.25rem; }
+<<<<<<< HEAD
     input[type="text"] {
       width: 100%; padding: 0.6rem 0.7rem; border-radius: 6px; border: 2px solid var(--cyber-border);
       background: rgba(0,0,0,0.5); color: var(--cyber-text); outline: none; transition: .2s ease;
     }
     input[type="text"]:focus { border-color: var(--cyber-primary); box-shadow: 0 0 14px rgba(0,255,255,0.25); background: rgba(0,0,0,0.7); }
+=======
+    input[type="email"] {
+      width: 100%; padding: 0.6rem 0.7rem; border-radius: 6px; border: 2px solid var(--cyber-border);
+      background: rgba(0,0,0,0.5); color: var(--cyber-text); outline: none; transition: .2s ease;
+    }
+    input[type="email"]:focus { border-color: var(--cyber-primary); box-shadow: 0 0 14px rgba(0,255,255,0.25); background: rgba(0,0,0,0.7); }
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 
     .cyber-btn { display: inline-block; width: 100%; background: linear-gradient(45deg, var(--cyber-primary), var(--cyber-secondary)); color: #000; border: none; border-radius: 8px; padding: 0.8rem 1rem; font-family: 'Orbitron', monospace; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; }
     .form-links { margin-top: 0.8rem; text-align: center; }
@@ -94,6 +102,7 @@ if (isset($_SESSION['user_id'])) {
   <main class="wrap">
     <section class="panel">
       <h2>Forgot Password</h2>
+<<<<<<< HEAD
       <p class="lead">Enter your ID number to continue.</p>
 
       <form id="forgotPasswordForm">
@@ -104,6 +113,18 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
         <button type="submit" class="cyber-btn">Verify ID Number</button>
+=======
+      <p class="lead">Enter your registered email to continue.</p>
+
+      <form id="forgotPasswordForm">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" />
+          <span class="error-message"></span>
+        </div>
+
+        <button type="submit" class="cyber-btn">Verify Email</button>
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 
         <div class="form-links">
           <a href="login.php">Back to Login</a>
@@ -120,7 +141,14 @@ if (isset($_SESSION['user_id'])) {
     </div>
   </footer>
 
+<<<<<<< HEAD
   <script src="../js/disable-rightclick.js"></script>
+=======
+<<<<<<< HEAD
+  <script src="../js/disable-rightclick.js"></script>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
   <script src="../js/forgot-password.js"></script>
 </body>
 </html>

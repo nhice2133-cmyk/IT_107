@@ -29,7 +29,15 @@ if (isset($_SESSION['user_id'])) {
         <div class="header-content">
             <div class="logo-container">
                 <div class="logo-icon">⚡</div>
+<<<<<<< HEAD
                 <div class="logo-text">CYBER<span class="accent">AUTH</span></div>
+=======
+<<<<<<< HEAD
+                <div class="logo-text">CYBER<span class="accent">AUTH</span></div>
+=======
+                <div class="logo-text">NEURAL<span class="accent">NET</span></div>
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
             </div>
             <div class="header-actions">
                 <a href="login.php" class="cyber-link">LOGIN</a>
@@ -72,7 +80,15 @@ if (isset($_SESSION['user_id'])) {
                                 <h2 class="terminal-title">INITIALIZE USER PROFILE</h2>
                                 <p class="terminal-subtitle">Enter your neural network credentials</p>
                                 
+<<<<<<< HEAD
                                 <form class="cyber-form" id="registrationForm" novalidate>
+=======
+<<<<<<< HEAD
+                                <form class="cyber-form" id="registrationForm" novalidate>
+=======
+                                <form class="cyber-form" id="registrationForm">
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                     <div class="form-grid">
                                         <!-- Personal Information Section -->
                                         <div class="form-section">
@@ -81,11 +97,22 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">🆔</span>
+<<<<<<< HEAD
                                                     ID NUMBER<span class="required-asterisk">*</span>
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="text" class="cyber-input" id="idNumber" name="idNumber" placeholder="YYYY-XXXX" readonly>
                                                     <span class="field-icon" id="idNumberIcon" style="display: none;">🔒</span>
+=======
+                                                    ID NUMBER*
+                                                </label>
+                                                <div class="input-container">
+                                                    <input type="text" class="cyber-input" id="idNumber" name="idNumber" placeholder="YYYY-XXXX" readonly>
+<<<<<<< HEAD
+                                                    <span class="field-icon" id="idNumberIcon" style="display: none;">🔒</span>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="idError"></div>
@@ -94,7 +121,11 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">👤</span>
+<<<<<<< HEAD
                                                     LAST NAME<span class="required-asterisk">*</span>
+=======
+                                                    LAST NAME*
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="text" class="cyber-input" id="lastName" name="lastName">
@@ -106,7 +137,11 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">👤</span>
+<<<<<<< HEAD
                                                     FIRST NAME<span class="required-asterisk">*</span>
+=======
+                                                    FIRST NAME*
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="text" class="cyber-input" id="firstName" name="firstName">
@@ -147,10 +182,21 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">📅</span>
+<<<<<<< HEAD
                                                     BIRTH DATE<span class="required-asterisk">*</span>
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="date" class="cyber-input" id="birthDate" name="birthDate" >
+=======
+                                                    BIRTH DATE*
+                                                </label>
+                                                <div class="input-container">
+<<<<<<< HEAD
+                                                    <input type="date" class="cyber-input" id="birthDate" name="birthDate" >
+=======
+                                                    <input type="date" class="cyber-input" id="birthDate" name="birthDate" required>
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="birthDateError"></div>
@@ -159,10 +205,21 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">🔢</span>
+<<<<<<< HEAD
                                                     AGE<span class="required-asterisk">*</span>
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="number" class="cyber-input" id="age" name="age" min="1" max="120" required readonly style="pointer-events: none; cursor: not-allowed;">
+=======
+                                                    AGE*
+                                                </label>
+                                                <div class="input-container">
+<<<<<<< HEAD
+                                                    <input type="number" class="cyber-input" id="age" name="age" min="1" max="120" required readonly style="pointer-events: none; cursor: not-allowed;">
+=======
+                                                    <input type="number" class="cyber-input" id="age" name="age" min="1" max="120" required readonly>
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="ageError"></div>
@@ -171,7 +228,11 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">⚧</span>
+<<<<<<< HEAD
                                                     SEX<span class="required-asterisk">*</span>
+=======
+                                                    SEX*
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                 </label>
                                                 <div class="input-container">
                                                     <select class="cyber-input" id="sex" name="sex" required>
@@ -193,10 +254,17 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">📱</span>
+<<<<<<< HEAD
                                                     PHONE NUMBER<span class="required-asterisk">*</span>
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="text" class="cyber-input" id="phoneNumber" maxlength="11" name="phone_number" placeholder="09 XXX XXX XXXX" required>
+=======
+                                                    PHONE NUMBER*
+                                                </label>
+                                                <div class="input-container">
+                                                    <input type="text" class="cyber-input" id="phoneNumber" name="phone_number" placeholder="09 XXX XXX XXXX" required>
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="phoneNumberError"></div>
@@ -205,7 +273,11 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">📧</span>
+<<<<<<< HEAD
                                                     EMAIL<span class="required-asterisk">*</span>
+=======
+                                                    EMAIL*
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="email" class="cyber-input" id="email" name="email" required>
@@ -217,10 +289,17 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">👤</span>
+<<<<<<< HEAD
                                                     USERNAME<span class="required-asterisk">*</span>
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="text" class="cyber-input" id="username" name="username" placeholder="john.1" required>
+=======
+                                                    USERNAME*
+                                                </label>
+                                                <div class="input-container">
+                                                    <input type="text" class="cyber-input" id="username" name="username" required>
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="usernameError"></div>
@@ -229,7 +308,11 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">🔐</span>
+<<<<<<< HEAD
                                                     PASSWORD<span class="required-asterisk">*</span>
+=======
+                                                    PASSWORD*
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="password" class="cyber-input" id="password" name="password" required>
@@ -243,7 +326,11 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">🔐</span>
+<<<<<<< HEAD
                                                     RE-ENTER PASSWORD<span class="required-asterisk">*</span>
+=======
+                                                    RE-ENTER PASSWORD*
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="password" class="cyber-input" id="confirmPassword" name="confirm_password" required>
@@ -251,7 +338,14 @@ if (isset($_SESSION['user_id'])) {
                                                     <div class="input-glow"></div>
                                                 </div>
                                                 <div class="error-message" id="confirmPasswordError"></div>
+<<<<<<< HEAD
                                                 <div class="success-message" id="confirmPasswordSuccess"></div>
+=======
+<<<<<<< HEAD
+                                                <div class="success-message" id="confirmPasswordSuccess"></div>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                             </div>
                                         </div>
 
@@ -262,7 +356,11 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">🌍</span>
+<<<<<<< HEAD
                                                     COUNTRY<span class="required-asterisk">*</span>
+=======
+                                                    COUNTRY*
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                 </label>
                                                 <div class="input-container">
                                                     <select class="cyber-input" id="country" name="country" required>
@@ -471,7 +569,11 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">🗺️</span>
+<<<<<<< HEAD
                                                     PROVINCE<span class="required-asterisk">*</span>
+=======
+                                                    PROVINCE*
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="text" class="cyber-input" id="province" name="province" required>
@@ -483,7 +585,11 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">🏙️</span>
+<<<<<<< HEAD
                                                     CITY/MUNICIPALITY<span class="required-asterisk">*</span>
+=======
+                                                    CITY/MUNICIPALITY*
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="text" class="cyber-input" id="city" name="city" required>
@@ -495,7 +601,11 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">🏘️</span>
+<<<<<<< HEAD
                                                     BARANGAY<span class="required-asterisk">*</span>
+=======
+                                                    BARANGAY*
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="text" class="cyber-input" id="barangay" name="barangay" required>
@@ -507,7 +617,11 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="input-group">
                                                 <label class="cyber-label">
                                                     <span class="label-icon">🏠</span>
+<<<<<<< HEAD
                                                     PUROK/STREET<span class="required-asterisk">*</span>
+=======
+                                                    PUROK/STREET*
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                                                 </label>
                                                 <div class="input-container">
                                                     <input type="text" class="cyber-input" id="purok" name="purok" required>
@@ -555,8 +669,31 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </footer>
 
+<<<<<<< HEAD
     <script src="../js/disable-rightclick.js"></script>
     <script src="../js/cyberpunk-register.js"></script>
     <!-- Auto-correction removed - warnings are shown instead via setupCapitalizationValidation() -->
+=======
+<<<<<<< HEAD
+    <script src="../js/disable-rightclick.js"></script>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+    <script src="../js/cyberpunk-register.js"></script>
+    <script>
+        function toTitleCase(str) {
+            return str.toLowerCase().replace(/(?:^|[\s\-'])\w/g, function(match) {
+                return match.toUpperCase();
+            });
+        }
+        ['lastName', 'firstName', 'middleName'].forEach(function(id) {
+            var elem = document.getElementById(id);
+            if (elem) {
+                elem.addEventListener('blur', function() {
+                    elem.value = toTitleCase(elem.value);
+                });
+            }
+        });
+    </script>
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 </body>
 </html>

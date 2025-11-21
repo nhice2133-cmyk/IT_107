@@ -6,10 +6,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const resetButton = document.getElementById('resetBtn');
     
     // Check if we have the required data from previous steps
+<<<<<<< HEAD
     const idNumber = sessionStorage.getItem('fp_idNumber');
     const answers = sessionStorage.getItem('fp_answers');
     
     if (!idNumber || !answers) {
+=======
+    const email = sessionStorage.getItem('fp_email');
+    const answers = sessionStorage.getItem('fp_answers');
+    
+    if (!email || !answers) {
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
         alert('Session expired. Please start the forgot password process again.');
         window.location.href = 'forgot-password.php';
         return;
@@ -128,7 +135,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const answers = JSON.parse(sessionStorage.getItem('fp_answers'));
         
         const payload = {
+<<<<<<< HEAD
             idNumber: idNumber,
+=======
+            email: email,
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
             answer1: answers.answer1,
             answer2: answers.answer2,
             answer3: answers.answer3,
@@ -145,7 +156,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.success) {
                 alert('Password reset successful! You can now login with your new password.');
                 // Clear session data
+<<<<<<< HEAD
                 sessionStorage.removeItem('fp_idNumber');
+=======
+                sessionStorage.removeItem('fp_email');
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                 sessionStorage.removeItem('fp_answers');
                 window.location.href = 'login.php';
             } else {

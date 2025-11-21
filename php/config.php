@@ -87,6 +87,7 @@ function requireAuthJson() {
     }
 }
 
+<<<<<<< HEAD
 function requireAuth404() {
     if (!validateSession()) {
         http_response_code(404);
@@ -170,6 +171,8 @@ function requireAuth404() {
     }
 }
 
+=======
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 function endSession() {
     if (session_status() === PHP_SESSION_ACTIVE) {
         $_SESSION = [];

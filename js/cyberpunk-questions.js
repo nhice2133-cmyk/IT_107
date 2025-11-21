@@ -31,8 +31,13 @@ class CyberpunkQuestions {
     }
 
     initForgotFlow() {
+<<<<<<< HEAD
         const idNumber = sessionStorage.getItem('fp_idNumber');
         if (!idNumber) {
+=======
+        const email = sessionStorage.getItem('fp_email');
+        if (!email) {
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
             window.location.href = 'forgot-password.php';
             return;
         }
@@ -41,7 +46,11 @@ class CyberpunkQuestions {
         fetch('../php/get_security_questions.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+<<<<<<< HEAD
             body: JSON.stringify({ idNumber })
+=======
+            body: JSON.stringify({ email })
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
         })
         .then(r => r.json())
         .then(res => {
@@ -70,13 +79,22 @@ class CyberpunkQuestions {
             fetch('../php/verify_security_answers.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+<<<<<<< HEAD
                 body: JSON.stringify({ idNumber, answer1: a1, answer2: a2, answer3: a3 })
+=======
+                body: JSON.stringify({ email, answer1: a1, answer2: a2, answer3: a3 })
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
             })
             .then(r => r.json())
             .then(res => {
                 if (res.success) {
+<<<<<<< HEAD
                     // store token-less indicator (ID number) and go to change-password
                         sessionStorage.setItem('cp_idNumber', idNumber);
+=======
+                    // store token-less indicator (email) and go to change-password
+                        sessionStorage.setItem('cp_email', email);
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                         sessionStorage.setItem('fp_answers', JSON.stringify({ answer1: a1, answer2: a2, answer3: a3 }));
                     window.location.href = 'change-password.php?mode=forgot';
                 } else {

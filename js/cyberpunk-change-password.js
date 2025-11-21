@@ -37,12 +37,21 @@ document.addEventListener('DOMContentLoaded', function() {
         addTypingEffect(this);
     });
 
+<<<<<<< HEAD
     // If in forgot mode, hide current password and require ID number from session
     const params = new URLSearchParams(window.location.search);
     const isForgot = params.get('mode') === 'forgot';
     if (isForgot) {
         const idNumber = sessionStorage.getItem('cp_idNumber');
         if (!idNumber) {
+=======
+    // If in forgot mode, hide current password and require email from session
+    const params = new URLSearchParams(window.location.search);
+    const isForgot = params.get('mode') === 'forgot';
+    if (isForgot) {
+        const email = sessionStorage.getItem('cp_email');
+        if (!email) {
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
             window.location.href = 'forgot-password.php';
             return;
         }
@@ -282,13 +291,21 @@ document.addEventListener('DOMContentLoaded', function() {
             addTerminalEffect();
             
             if (isForgot) {
+<<<<<<< HEAD
                 const idNumber = sessionStorage.getItem('cp_idNumber');
+=======
+                const email = sessionStorage.getItem('cp_email');
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                 const answers = JSON.parse(sessionStorage.getItem('fp_answers') || '{}');
                 fetch('../php/verify_security_answers.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
+<<<<<<< HEAD
                         idNumber,
+=======
+                        email,
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                         answer1: answers.answer1,
                         answer2: answers.answer2,
                         answer3: answers.answer3,
@@ -299,7 +316,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(r => r.json())
                 .then(res => {
                     if (res.success) {
+<<<<<<< HEAD
                         sessionStorage.removeItem('cp_idNumber');
+=======
+                        sessionStorage.removeItem('cp_email');
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
                         sessionStorage.removeItem('fp_answers');
                         showSuccessMessage();
                     } else {

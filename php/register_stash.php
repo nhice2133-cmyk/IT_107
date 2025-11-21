@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 <?php
 require_once 'config.php';
 
@@ -37,6 +40,7 @@ $country = sanitizeInput($payload['country'] ?? '');
 $errors = [];
 $fieldErrors = [];
 
+<<<<<<< HEAD
 // Username validation - format must be "lowercase.#" (e.g., john.1)
 if ($username === '') {
     $errors[] = 'Invalid username';
@@ -56,6 +60,12 @@ if ($username === '') {
         $errors[] = 'Invalid username';
         $fieldErrors['username'] = 'Username format must be "lowercase.#" (e.g., john.1) - lowercase letters, a dot, then numbers';
     }
+=======
+// Username validation
+if ($username === '' || strlen($username) < 3 || !preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
+    $errors[] = 'Invalid username';
+    $fieldErrors['username'] = 'Username must be at least 3 characters and contain only letters, numbers, and underscores';
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 }
 
 // Email validation
@@ -85,6 +95,7 @@ if ($idNumber !== '' && !preg_match('/^\d{4}-\d{4}$/', $idNumber)) {
 if ($phoneNumber === '') {
     $errors[] = 'Phone number is required';
     $fieldErrors['phoneNumber'] = 'Phone number is required';
+<<<<<<< HEAD
 } else {
     $digitsOnlyPhone = preg_replace('/\D/', '', $phoneNumber);
     if (!preg_match('/^09\d{9}$/', $digitsOnlyPhone)) {
@@ -93,6 +104,11 @@ if ($phoneNumber === '') {
     } else {
         $phoneNumber = $digitsOnlyPhone;
     }
+=======
+} elseif (!preg_match('/^\d{11}$/', preg_replace('/\D/', '', $phoneNumber))) {
+    $errors[] = 'Phone number must be exactly 11 digits';
+    $fieldErrors['phoneNumber'] = 'Phone number must be exactly 11 digits';
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 }
 
 // Required personal information validation

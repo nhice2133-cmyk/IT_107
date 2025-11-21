@@ -4,7 +4,12 @@ require_once '../php/config.php';
 // Allow forgot-password flow without active session when mode=forgot
 $mode = isset($_GET['mode']) ? $_GET['mode'] : '';
 if (!isset($_SESSION['user_id']) && $mode !== 'forgot') {
+<<<<<<< HEAD
     requireAuth404();
+=======
+    header('Location: login.php');
+    exit();
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 }
 ?>
 <!DOCTYPE html>
@@ -227,7 +232,14 @@ if (!isset($_SESSION['user_id']) && $mode !== 'forgot') {
         </div>
     </footer>
 
+<<<<<<< HEAD
     <script src="../js/disable-rightclick.js"></script>
+=======
+<<<<<<< HEAD
+    <script src="../js/disable-rightclick.js"></script>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
     <script src="../js/cyberpunk-change-password.js?v=20251013"></script>
     
     <!-- Back button protection disabled during debugging -->

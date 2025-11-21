@@ -417,8 +417,18 @@ body {
     overflow: hidden;
     width: 100%;
     max-width: 400px;
+<<<<<<< HEAD
     height: auto;
     min-height: 400px;
+=======
+<<<<<<< HEAD
+    height: auto;
+    min-height: 400px;
+=======
+    height: 100%;
+    max-height: 400px;
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
     display: flex;
     flex-direction: column;
 }
@@ -630,10 +640,19 @@ body {
     border-radius: 4px;
     padding: 0.6rem;
     margin: 0.6rem 0;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
     display: none;
     flex-direction: column;
     gap: 0.4rem;
     align-items: stretch;
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 }
 
 .attempts-warning {
@@ -656,6 +675,10 @@ body {
     font-size: 0.7rem;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 .login-attempts .forgot-prompt {
     display: none;
     align-items: center;
@@ -678,6 +701,11 @@ body {
     font-size: 0.68rem;
 }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 /* Cyber Button */
 .cyber-btn {
     position: relative;
@@ -695,10 +723,19 @@ body {
     transition: all 0.3s ease;
     overflow: hidden;
     margin-top: 0.3rem;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 }
 
 .cyber-btn:hover {
@@ -880,7 +917,15 @@ body {
     }
     
     .terminal-frame {
+<<<<<<< HEAD
         min-height: 350px;
+=======
+<<<<<<< HEAD
+        min-height: 350px;
+=======
+        max-height: 350px;
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
     }
 }
 
@@ -922,7 +967,15 @@ body {
     }
     
     .terminal-frame {
+<<<<<<< HEAD
         min-height: 320px;
+=======
+<<<<<<< HEAD
+        min-height: 320px;
+=======
+        max-height: 300px;
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
     }
     
     .footer-content {
@@ -979,6 +1032,14 @@ body {
     }
     
     .terminal-frame {
+<<<<<<< HEAD
         min-height: 280px;
+=======
+<<<<<<< HEAD
+        min-height: 280px;
+=======
+        max-height: 250px;
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
     }
 }

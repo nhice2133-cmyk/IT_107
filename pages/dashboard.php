@@ -1,9 +1,16 @@
 <?php
 require_once '../php/config.php';
 
+<<<<<<< HEAD
 // Validate session and show 404 if not authenticated
 if (!validateSession()) {
     requireAuth404();
+=======
+// Validate session and redirect to login if not authenticated
+if (!validateSession()) {
+    header('Location: login.php');
+    exit();
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 }
 ?>
 <!DOCTYPE html>
@@ -112,6 +119,16 @@ if (!validateSession()) {
         <div class="logo-icon">⚡</div>
         <h1 class="logo-text">CYBER<span class="accent">AUTH</span></h1>
       </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+      <div class="header-actions">
+        <a href="change-password.php" class="nav-link cyber-link">CHANGE PASSWORD</a>
+        <a href="../php/logout.php" class="nav-link cyber-link">LOGOUT</a>
+      </div>
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
     </div>
   </header>
 
@@ -186,7 +203,14 @@ if (!validateSession()) {
     </div>
   </footer>
 
+<<<<<<< HEAD
   <script src="../js/disable-rightclick.js"></script>
+=======
+<<<<<<< HEAD
+  <script src="../js/disable-rightclick.js"></script>
+=======
+>>>>>>> 7227c79c4fbdf61914be7893bc9dedd8371defbb
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
   <script src="../js/dashboard.js"></script>
   
   <!-- Back button protection disabled during debugging -->

@@ -8,7 +8,10 @@ header('Content-Type: application/json');
 $payload = json_decode(file_get_contents('php://input'), true);
 if (!$payload) { echo json_encode(['success' => false, 'message' => 'Invalid payload']); exit; }
 
+<<<<<<< HEAD
 $idNumber = sanitizeInput($payload['idNumber'] ?? '');
+=======
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 $email = sanitizeInput($payload['email'] ?? '');
 $a1 = trim($payload['answer1'] ?? '');
 $a2 = trim($payload['answer2'] ?? '');
@@ -16,8 +19,13 @@ $a3 = trim($payload['answer3'] ?? '');
 // Optional: allow password reset in the same call
 $newPassword = $payload['newPassword'] ?? '';
 
+<<<<<<< HEAD
 if (!$idNumber && !$email) {
     echo json_encode(['success' => false, 'message' => 'ID number or email is required']);
+=======
+if (!$email) {
+    echo json_encode(['success' => false, 'message' => 'Email is required']);
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
     exit;
 }
 // At least 2 out of 3 answers must be provided
@@ -30,8 +38,12 @@ if ($answersProvided < 2) {
     echo json_encode(['success' => false, 'message' => 'Please answer at least 2 security questions']);
     exit;
 }
+<<<<<<< HEAD
 if ($email && !validateEmail($email)) { echo json_encode(['success' => false, 'message' => 'Invalid email']); exit; }
 if ($idNumber && !preg_match('/^\d{4}-\d{4}$/', $idNumber)) { echo json_encode(['success' => false, 'message' => 'Invalid ID number format']); exit; }
+=======
+if (!validateEmail($email)) { echo json_encode(['success' => false, 'message' => 'Invalid email']); exit; }
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 // If newPassword provided, validate minimal policy
 if ($newPassword !== '' && strlen($newPassword) < PASSWORD_MIN_LENGTH) {
     echo json_encode(['success' => false, 'message' => 'Password must be at least ' . PASSWORD_MIN_LENGTH . ' characters']);
@@ -39,6 +51,7 @@ if ($newPassword !== '' && strlen($newPassword) < PASSWORD_MIN_LENGTH) {
 }
 
 $db = new Database();
+<<<<<<< HEAD
 if ($idNumber) {
     $stmt = $db->prepare("SELECT id FROM users WHERE id_number = ? AND is_active = 1 LIMIT 1");
     $stmt->execute([$idNumber]);
@@ -48,6 +61,12 @@ if ($idNumber) {
 }
 $user = $stmt->fetch();
 if (!$user) { echo json_encode(['success' => false, 'message' => 'User not found']); exit; }
+=======
+$stmt = $db->prepare("SELECT id FROM users WHERE email = ? AND is_active = 1 LIMIT 1");
+$stmt->execute([$email]);
+$user = $stmt->fetch();
+if (!$user) { echo json_encode(['success' => false, 'message' => 'Email not found']); exit; }
+>>>>>>> a1f61761fb42c6888cbff1da3e5852e7af719b2e
 
 $q = $db->prepare("SELECT answer1, answer2, answer3 FROM user_security_questions WHERE user_id = ? LIMIT 1");
 $q->execute([$user['id']]);
